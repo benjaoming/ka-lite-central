@@ -12,7 +12,6 @@ from django.utils import unittest
 
 from .. import POT_DIRPATH
 
-
 class TranslationCommentTestCase(LiveServerTestCase):
     """
     """
