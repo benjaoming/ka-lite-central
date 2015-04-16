@@ -36,8 +36,7 @@ class Node(MPTTModel):
     created = models.DateTimeField(auto_now_add=True, verbose_name=_("created"))
     modified = models.DateTimeField(auto_now=True, verbose_name=_("modified"))
 
-    # TODO: Does this work on abstract classes?
-    content = models.ForeignKey(Content)
+    parent = TreeForeignKey('self', null=True, blank=True, related_name='children')
 
     name = models.CharField(
         max_length=50,
@@ -67,8 +66,6 @@ class Node(MPTTModel):
         verbose_name=_("sort order"),
         help_text=_("Ascending, lowest number shown first"),
     )
-
-    parent = TreeForeignKey('self', null=True, blank=True, related_name='children')
     
     @property
     def has_draft(self):
@@ -93,12 +90,13 @@ class Node(MPTTModel):
         unique_together = ('parent', 'name')
 
 
-class Content(models.Model):
-    # TODO: Drafts?
+class TopicNode(Node):
+    # TODO: Anything specific to TopicNode?
 
+
+class ContentNode(Node):
     """
-    Model for content data, fields that are shared across videos,
-    exercises, and books...
+    Model for content data nodes, which will be stored as leaves only
     """
 
     author = models.CharField(
