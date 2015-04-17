@@ -91,7 +91,19 @@ class Node(MPTTModel):
 
 
 class TopicNode(Node):
-    # TODO: Anything specific to TopicNode?
+    # Rename the colors when they have decided roles in the UI
+    # Length 7 because hex codes?
+    color1 = models.CharField(
+        max_length=7
+    )
+
+    color2 = models.CharField(
+        max_length=7
+    )
+
+    color3 = models.CharField(
+        max_length=7
+    )
 
 
 class ContentNode(Node):
