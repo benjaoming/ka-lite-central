@@ -8,82 +8,310 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-12 14:09-0500\n"
+"POT-Creation-Date: 2017-07-21 20:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: admin.py:23
+#: registration/admin.py:23
 msgid "Activate users"
 msgstr ""
 
-#: admin.py:43
+#: registration/admin.py:43
 msgid "Re-send activation emails"
 msgstr ""
 
-#: forms.py:35
-msgid "username"
-msgstr ""
-
-#: forms.py:36
-msgid "This value must contain only letters, numbers and underscores."
-msgstr ""
-
-#: forms.py:39
+#: registration/forms.py:34
 msgid "Email address"
 msgstr ""
 
-#: forms.py:41
+#: registration/forms.py:36
 msgid "Password"
 msgstr ""
 
-#: forms.py:43
+#: registration/forms.py:38
 msgid "Password (again)"
 msgstr ""
 
-#: forms.py:55
-msgid "A user with that username already exists."
+#: registration/forms.py:52
+msgid "You must specify an email address."
 msgstr ""
 
-#: forms.py:67
-msgid "The two password fields didn't match."
-msgstr ""
-
-#: forms.py:78
-msgid "I have read and agree to the Terms of Service"
-msgstr ""
-
-#: forms.py:79
-msgid "You must agree to the terms to register"
-msgstr ""
-
-#: forms.py:95
+#: registration/forms.py:54
 msgid ""
 "This email address is already in use. Please supply a different email "
 "address."
 msgstr ""
 
-#: forms.py:122
-msgid ""
-"Registration using free email addresses is prohibited. Please supply a "
-"different email address."
+#: registration/forms.py:68
+msgid "The two password fields didn't match."
 msgstr ""
 
-#: models.py:165
+#: registration/forms.py:72
+msgid "You must acknowledge having read these terms."
+msgstr ""
+
+#: registration/models.py:169
 msgid "user"
 msgstr ""
 
-#: models.py:166
+#: registration/models.py:170
 msgid "activation key"
 msgstr ""
 
-#: models.py:171
+#: registration/models.py:175
 msgid "registration profile"
 msgstr ""
 
-#: models.py:172
+#: registration/models.py:176
 msgid "registration profiles"
+msgstr ""
+
+#: registration/templates/registration/activate.html:5
+msgid "Account activated"
+msgstr ""
+
+#: registration/templates/registration/activate.html:8
+msgid "Account activated."
+msgstr ""
+
+#: registration/templates/registration/activate.html:12
+msgid "Thanks for signing up!"
+msgstr ""
+
+#: registration/templates/registration/activate.html:16
+#, python-format
+msgid ""
+"Sorry, it didn't work.\n"
+"        Either your activation link was incorrect, or the activation key for "
+"your account has expired.\n"
+"        Activation keys are only valid for %(ndays)s days after "
+"registration.\n"
+"        If you think this could be the issue, try resubmitting your "
+"registration.\n"
+"        "
+msgstr ""
+
+#: registration/templates/registration/activation_complete.html:4
+msgid "Activation complete"
+msgstr ""
+
+#: registration/templates/registration/activation_complete.html:7
+msgid "Congratulations!"
+msgstr ""
+
+#: registration/templates/registration/activation_complete.html:8
+msgid "Your registration is now complete."
+msgstr ""
+
+#: registration/templates/registration/activation_complete.html:8
+msgid "Enjoy using KA Lite!"
+msgstr ""
+
+#: registration/templates/registration/login.html:4
+#: registration/templates/registration/login.html:13
+#: registration/templates/registration/login.html:69
+#: registration/templates/registration/password_reset_complete.html:13
+msgid "Log in"
+msgstr ""
+
+#: registration/templates/registration/login.html:16
+msgid ""
+"Please note that this is the central server; you cannot log in here using "
+"your local server's account information."
+msgstr ""
+
+#. Translators please make sure to keep the link tag and text in-tact
+#: registration/templates/registration/login.html:21
+#, python-format
+msgid ""
+"If you do not have an account on the central server, you can <a href="
+"\"%(registration_register_url)s\">sign up here</a>."
+msgstr ""
+
+#: registration/templates/registration/login.html:29
+msgid "This account has not been activated."
+msgstr ""
+
+#: registration/templates/registration/login.html:31
+msgid "Incorrect user name or password."
+msgstr ""
+
+#: registration/templates/registration/login.html:73
+#, python-format
+msgid ""
+"If you've forgotten your password, you can <a "
+"href='%(auth_password_reset_url)s'>reset it here</a>."
+msgstr ""
+
+#: registration/templates/registration/logout.html:3
+msgid "Logged out"
+msgstr ""
+
+#: registration/templates/registration/logout.html:6
+msgid "You"
+msgstr ""
+
+#: registration/templates/registration/logout.html:7
+msgid "Thanks for stopping by; when you come back, don"
+msgstr ""
+
+#: registration/templates/registration/password_change_done.html:4
+#: registration/templates/registration/password_change_done.html:7
+msgid "Password change successful"
+msgstr ""
+
+#: registration/templates/registration/password_change_done.html:9
+msgid "Your password was changed."
+msgstr ""
+
+#: registration/templates/registration/password_change_form.html:4
+#: registration/templates/registration/password_change_form.html:8
+msgid "Password change"
+msgstr ""
+
+#: registration/templates/registration/password_change_form.html:10
+msgid ""
+"Please enter your old password, for security's sake, and then enter your new "
+"password twice so we can verify you typed it in correctly."
+msgstr ""
+
+#: registration/templates/registration/password_change_form.html:16
+msgid "Old password"
+msgstr ""
+
+#: registration/templates/registration/password_change_form.html:22
+msgid "New password"
+msgstr ""
+
+#: registration/templates/registration/password_change_form.html:28
+msgid "Confirm password"
+msgstr ""
+
+#: registration/templates/registration/password_change_form.html:32
+#: registration/templates/registration/password_reset_confirm.html:35
+msgid "Change my password"
+msgstr ""
+
+#: registration/templates/registration/password_reset_complete.html:6
+#: registration/templates/registration/password_reset_complete.html:9
+msgid "Password reset complete"
+msgstr ""
+
+#: registration/templates/registration/password_reset_complete.html:11
+msgid "Your password has been set.  You may go ahead and log in now."
+msgstr ""
+
+#: registration/templates/registration/password_reset_confirm.html:6
+#: registration/templates/registration/password_reset_form.html:6
+#: registration/templates/registration/password_reset_form.html:10
+msgid "Password reset"
+msgstr ""
+
+#: registration/templates/registration/password_reset_confirm.html:12
+msgid "Enter new password"
+msgstr ""
+
+#: registration/templates/registration/password_reset_confirm.html:16
+msgid ""
+"Please enter your new password twice so we can verify you typed it in "
+"correctly."
+msgstr ""
+
+#: registration/templates/registration/password_reset_confirm.html:24
+msgid "New password:"
+msgstr ""
+
+#: registration/templates/registration/password_reset_confirm.html:30
+msgid "Confirm password:"
+msgstr ""
+
+#: registration/templates/registration/password_reset_confirm.html:42
+msgid "Password reset unsuccessful"
+msgstr ""
+
+#: registration/templates/registration/password_reset_confirm.html:46
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a new password reset."
+msgstr ""
+
+#: registration/templates/registration/password_reset_done.html:6
+#: registration/templates/registration/password_reset_done.html:10
+msgid "Password reset successful"
+msgstr ""
+
+#: registration/templates/registration/password_reset_done.html:14
+msgid ""
+"We've e-mailed you instructions for setting your password to the e-mail "
+"address you submitted. You should be receiving it shortly."
+msgstr ""
+
+#: registration/templates/registration/password_reset_email.html:2
+msgid "You're receiving this e-mail because you requested a password reset"
+msgstr ""
+
+#: registration/templates/registration/password_reset_email.html:3
+#, python-format
+msgid "for your user account at %(site_name)s"
+msgstr ""
+
+#: registration/templates/registration/password_reset_email.html:5
+msgid "Please go to the following page and choose a new password:"
+msgstr ""
+
+#: registration/templates/registration/password_reset_email.html:9
+msgid "Your username, in case you've forgotten:"
+msgstr ""
+
+#: registration/templates/registration/password_reset_email.html:11
+msgid "Thanks for using our site!"
+msgstr ""
+
+#. Translators: Please do not change the variable text %(site_name)s.
+#: registration/templates/registration/password_reset_email.html:14
+#, python-format
+msgid "The %(site_name)s team"
+msgstr ""
+
+#: registration/templates/registration/password_reset_form.html:14
+msgid ""
+"Forgotten your password? Enter your e-mail address below, and we'll e-mail "
+"instructions for setting a new one."
+msgstr ""
+
+#: registration/templates/registration/password_reset_form.html:21
+msgid "E-mail address:"
+msgstr ""
+
+#: registration/templates/registration/password_reset_form.html:23
+msgid "Reset my password"
+msgstr ""
+
+#: registration/templates/registration/registration_complete.html:4
+msgid "Registration complete"
+msgstr ""
+
+#: registration/templates/registration/registration_complete.html:7
+msgid "Check your email"
+msgstr ""
+
+#: registration/templates/registration/registration_complete.html:10
+msgid ""
+"An activation link has been sent to the email address you supplied, along "
+"with instructions for activating your account."
+msgstr ""
+
+#: registration/templates/registration/registration_form.html:4
+msgid "Sign up"
+msgstr ""
+
+#: registration/views.py:253
+msgid ""
+"An account with this email address has already been created.  Please login "
+"at the link above."
 msgstr ""
