@@ -2,3 +2,4 @@ pathlib==1.0
 wsgiref==0.1.2
 simplekml==1.2.3
 django-postmark==0.1.6
+-r ka-lite-submodule/requirements_test.txt
