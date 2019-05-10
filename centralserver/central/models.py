@@ -147,6 +147,8 @@ class UserProfile(ExtendedModel):
 
     def has_permission_for_object(self, object):
 
+        return True
+
         # super users have access to every object
         if self.user.is_superuser:
             return True
