@@ -1,20 +1,18 @@
-"""
-"""
-import random
-import datetime
+from datetime import datetime, timedelta
 from collections_local_copy import OrderedDict
 
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
 from django.core.mail import send_mail
-from django.db import models, transaction
+from django.db import models
 from django.template.loader import render_to_string
 from django.template import RequestContext
 from django.utils.translation import ugettext_lazy as _
 
 from fle_utils.django_utils.classes import ExtendedModel
 from securesync.models import Zone
+from kalite.facility.models import FacilityGroup, Facility, FacilityUser
 
 
 def get_or_create_user_profile(user):
@@ -204,7 +202,81 @@ class OrganizationInvitation(ExtendedModel):
 
 
 class DeletionRecord(ExtendedModel):
+
     organization = models.ForeignKey(Organization)
     deleter = models.ForeignKey(User, related_name="deletion_actor")
     deleted_user = models.ForeignKey(User, related_name="deletion_recipient", blank=True, null=True)
     deleted_invite = models.ForeignKey(OrganizationInvitation, blank=True, null=True)
+
+
+class CSVJob(models.Model):
+    
+    # Can you make a kind of ENUM list in Python, where each item also has
+    # a string label associated with it? :)
+    (
+        USERS,
+        ATTEMPTS,
+        EXERCISES,
+        RATINGS,
+        DEVICES,
+    ) = REPORT_TYPE_ENUMS = range(0, 5) 
+    
+    REPORT_TYPE_CHOICES = zip(
+        REPORT_TYPE_ENUMS,
+        (
+            "User log",
+            "Attempt log",
+            "Exercise log",
+            "Ratings",
+            "Device log"
+        ),
+    )
+    
+    owner = models.ForeignKey(
+        User,
+        help_text=_("Owner having rights to access this job at its creation time")
+    )
+    zone = models.ForeignKey(Zone)
+    facility = models.ForeignKey(Facility, null=True, blank=True)
+    facility_group = models.ForeignKey(FacilityGroup, null=True, blank=True)
+    
+    report_type = models.PositiveSmallIntegerField(
+        default=0,
+        choices=REPORT_TYPE_CHOICES,
+    )
+
+    finished = models.BooleanField(default=False)
+    
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+    expires_at = models.DateTimeField(null=True,)
+
+    csv_file = models.FileField(null=True, blank=True, upload_to='csv_reports/')
+
+    def set_expiry(self):
+        """
+        Sets the expiry to 14 days after the last modification (assumed when the
+        job result was ready)
+        """
+        self.expires_at = self.modified + timedelta(days=14)
+        self.save()
+
+    def get_queryset(self):
+        
+        if self.report_type == CSVJob.USERS:
+            
+            # COPY-PAST, NEED TO FIX.
+            zone_id = self.zone
+            facility_id = self.facility
+            group_id = self.facility_group
+        
+            # They must have a zone_id, and may have a facility_id and group_id.
+            # Try to filter from most specific, to least
+            if group_id:
+                facility_user_objects = FacilityUser.objects.filter(group__id=group_id)
+            elif facility_id:
+                facility_user_objects = FacilityUser.objects.filter(facility__id=facility_id)
+            elif zone_id:
+                facility_user_objects = FacilityUser.objects.by_zone(get_object_or_None(Zone, id=zone_id))
+            else:
+                facility_user_objects = FacilityUser.objects.all()
