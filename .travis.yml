@@ -2,7 +2,12 @@ dist: xenial
 
 language: python
 
-sudo: false
+addons:
+  apt:
+    update: true
+
+before_install:
+  - sudo apt-get -y install python-dev libmysqlclient-dev
 
 python:
   - '2.7'
