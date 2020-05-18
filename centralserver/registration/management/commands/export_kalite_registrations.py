@@ -109,7 +109,7 @@ def sessions_per_day(csv_file):
     if not syncs_per_day.exists():
         print("No syncs found for summary")
     
-    print("Looking into registrations per day. Found {} days with registrations.".format(syncs_per_day.count()))
+    print("Looking into sync sessions per day. Found {} days with sync sessions.".format(syncs_per_day.count()))
     
     for sync in syncs_per_day:
 
