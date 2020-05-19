@@ -70,3 +70,36 @@ You may create a `centralserver/local_settings.py` file to customize your setup.
 You don't have to. The default is `DEBUG=True` and to use a local sqlite db.
 
 Use `USE_DEBUG_TOOLBAR = True` for the Django debug toolbar.
+
+### Using an online staging database
+
+You will need to install MySQL Python libraries and a local dev library firstly:
+
+```
+sudo apt-get install libmysqlclient-dev
+pip install -r requirements_production.txt
+```
+
+After this, you may add for instance a Google Cloud MySQL instance to `local_settings.py`:
+
+```
+DATABASES_KEEP_STAGING = {
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "ka_lite_central",
+        "USER": "ka_lite_central",
+        "PASSWORD": DATABASE_PASSWORD,
+        "HOST": "1.2.3.4",
+        "PORT": "3306",
+        "OPTIONS": {
+            "ssl": {
+                "ca": "/home/balder/code/ansible-playbooks/roles/keep/files/secrets/staging/server-ca.pem",
+                "cert": "/home/balder/code/ansible-playbooks/roles/keep/files/secrets/staging/client-cert.pem",
+                "key": "/home/balder/code/ansible-playbooks/roles/keep/files/secrets/staging/client-key.pem",
+            }
+        },
+    }
+}
+
+DATABASES = DATABASES_KEEP_STAGING
+```
