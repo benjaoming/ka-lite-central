@@ -116,9 +116,9 @@ DATABASES_KEEP_STAGING = {
         "PORT": "3306",
         "OPTIONS": {
             "ssl": {
-                "ca": "/home/balder/code/ansible-playbooks/roles/keep/files/secrets/staging/server-ca.pem",
-                "cert": "/home/balder/code/ansible-playbooks/roles/keep/files/secrets/staging/client-cert.pem",
-                "key": "/home/balder/code/ansible-playbooks/roles/keep/files/secrets/staging/client-key.pem",
+                "ca": "/path/to/staging/server-ca.pem",
+                "cert": "/path/to/client-cert.pem",
+                "key": "/path/to/client-key.pem",
             }
         },
     }
