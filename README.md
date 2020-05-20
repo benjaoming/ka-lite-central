@@ -46,8 +46,9 @@ The repo contains two branches:
 
 ## Archive (2020)
 
-A separate app `centralserver.archive` has been created and it runs on a
-separate database by means of `centralserver.database_routers`.
+A separate app `centralserver.archive` has been created in 2020 to scale down
+the in-production database. It archives data to a separate database by means of
+`centralserver.database_routers`.
 
 To create the new database, run:
 
@@ -60,6 +61,20 @@ To update the archive on-demand or from a cron-job, run:
 ```
 python manage.py archive_sync
 ```
+
+This will create new data in the archive, however we also want to reduce the
+size of the `default` database, the one in production:
+
+```
+python manage.py archive_sync --delete-source-rows
+```
+
+This option is as dangerous as it sounds! It will irrevocably delete the data
+that is archived, but of course it will not delete it until it's actually
+archived.
+
+**Transactions**: The archiving is done in several smaller atomic transactions,
+such that we don't have gigabyte-sized transactions committed or rolled back.
 
 Since this is Django 1.5, the new archive database does not use migrations. It
 could be using South, but it's complicated to have a migration history table
