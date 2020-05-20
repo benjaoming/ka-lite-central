@@ -44,6 +44,29 @@ The repo contains two branches:
    python manage.py runserver 0.0.0.0:8000
    ```
 
+## Archive (2020)
+
+A separate app `centralserver.archive` has been created and it runs on a
+separate database by means of `centralserver.database_routers`.
+
+To create the new database, run:
+
+```
+python manage.py syncdb --database=archive
+```
+
+To update the archive on-demand or from a cron-job, run:
+
+```
+python manage.py archive_sync
+```
+
+Since this is Django 1.5, the new archive database does not use migrations. It
+could be using South, but it's complicated to have a migration history table
+in two databases. If new fields are needed, it's suggested to start work on a
+separate project with Python 3 and Django 3, cloning the models from the
+`centralserver.archive` application and making use of django.db.migrations.
+
 ### Docker workflow
 
 The docker container mounts your current working directory in the container, builds assets and shuts down. All changes are stored directly in your git checkout.
